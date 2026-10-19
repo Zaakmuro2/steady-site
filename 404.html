@@ -23,6 +23,16 @@
     <p class="note" id="open-note">Already have Steady? <a id="open" href="#">Open it with this code</a>.</p>
     <p class="note">Codes are single use and expire two weeks after they are shared.</p>
   </section>
+  <section id="friend" hidden>
+    <p class="eyebrow">Friends on Steady</p>
+    <h1>A friend wants to send you reminders.</h1>
+    <p class="lead">Steady rings through Silent and Focus so the things that matter get done. Friends can send each other reminders, and nothing goes on your schedule until you say so. Open this link on an iPhone with Steady installed to add them.</p>
+    <div class="row">
+      <a class="primary" id="open-f" href="#">Open in Steady</a>
+      <a class="secondary" id="get-f" href="#">Get Steady</a>
+    </div>
+    <p class="note">Steady is invite only right now. Ask your friend for their invite code too.</p>
+  </section>
   <section id="missing" hidden>
     <p class="eyebrow">Nothing here</p>
     <h1>That page does not exist.</h1>
@@ -36,6 +46,13 @@
   var GET_URL = "https://testflight.apple.com/join/REPLACE_ME";
   var m = location.pathname.match(/^\/i\/([A-Za-z0-9]{4}-[A-Za-z0-9]{4})\/?$/) || (location.pathname === "/join" && location.search.match(/[?&]code=([A-Za-z0-9]{4}-[A-Za-z0-9]{4})/));
   var code = m && m[1] ? m[1].toUpperCase() : null;
+  var fm = location.pathname.match(/^\/f\/([A-Za-z0-9_-]{22,64})\/?$/);
+  if (fm) {
+    document.getElementById("friend").hidden = false;
+    document.getElementById("open-f").href = "steady://f/" + fm[1];
+    document.getElementById("get-f").href = GET_URL;
+    return;
+  }
   if (!code) { document.getElementById("missing").hidden = false; return; }
   document.getElementById("invite").hidden = false;
   document.getElementById("code").textContent = code;

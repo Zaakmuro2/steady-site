@@ -5,6 +5,7 @@
         "appIDs": ["Y746J37NHH.com.zaakmuro.steadymeds"],
         "components": [
           { "/": "/i/*", "comment": "Invite code" },
+          { "/": "/f/*", "comment": "Friend link" },
           { "/": "/join", "?": { "code": "*" }, "comment": "Invite code as a query" }
         ]
       }
