@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Your Steady invite</title>
+<meta name="description" content="An invite to Steady, the reminder app with alarms that ring through Silent and Focus.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/site.css">
+</head>
+<body>
+<main class="wrap">
+  <a class="mark" href="/" aria-label="Steady home"><span class="dot"></span>Steady</a>
+  <section id="invite" hidden>
+    <p class="eyebrow">You're invited</p>
+    <h1>A friend saved you a spot in Steady.</h1>
+    <p class="lead">Steady rings through Silent and Focus so the things that matter get done. Your invite code is below. On an iPhone with Steady installed, this link opens the app with the code filled in.</p>
+    <div class="code" id="code" aria-live="polite">ABCD-1234</div>
+    <div class="row">
+      <button class="primary" id="copy" type="button">Copy code</button>
+      <a class="secondary" id="get" href="#">Get Steady</a>
+    </div>
+    <p class="note" id="open-note">Already have Steady? <a id="open" href="#">Open it with this code</a>.</p>
+    <p class="note">Codes are single use and expire two weeks after they are shared.</p>
+  </section>
+  <section id="missing" hidden>
+    <p class="eyebrow">Nothing here</p>
+    <h1>That page does not exist.</h1>
+    <p class="lead">If someone sent you an invite, ask them for the link again. It looks like steadyreminders.app/i/XXXX-0000.</p>
+    <div class="row"><a class="primary" href="/">Go to Steady</a></div>
+  </section>
+</main>
+<script>
+(function () {
+  // Fill these two when the links exist: the TestFlight public link during testing, the App Store page after launch.
+  var GET_URL = "https://testflight.apple.com/join/REPLACE_ME";
+  var m = location.pathname.match(/^\/i\/([A-Za-z0-9]{4}-[A-Za-z0-9]{4})\/?$/) || (location.pathname === "/join" && location.search.match(/[?&]code=([A-Za-z0-9]{4}-[A-Za-z0-9]{4})/));
+  var code = m && m[1] ? m[1].toUpperCase() : null;
+  if (!code) { document.getElementById("missing").hidden = false; return; }
+  document.getElementById("invite").hidden = false;
+  document.getElementById("code").textContent = code;
+  document.getElementById("get").href = GET_URL;
+  document.getElementById("open").href = "steady://i/" + code;
+  var btn = document.getElementById("copy");
+  btn.addEventListener("click", function () {
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy code"; }, 1800); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, done);
+    else { var r = document.createRange(); r.selectNodeContents(document.getElementById("code")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); try { document.execCommand("copy"); } catch (e) {} done(); }
+  });
+})();
+</script>
+</body>
+</html>

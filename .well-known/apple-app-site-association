@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["Y746J37NHH.com.zaakmuro.steadymeds"],
+        "components": [
+          { "/": "/i/*", "comment": "Invite code" },
+          { "/": "/join", "?": { "code": "*" }, "comment": "Invite code as a query" }
+        ]
+      }
+    ]
+  },
+  "webcredentials": { "apps": ["Y746J37NHH.com.zaakmuro.steadymeds"] }
+}
