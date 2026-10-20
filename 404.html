@@ -42,8 +42,8 @@
 </main>
 <script>
 (function () {
-  // Fill these two when the links exist: the TestFlight public link during testing, the App Store page after launch.
-  var GET_URL = "https://testflight.apple.com/join/REPLACE_ME";
+  // Where the "get Steady" button goes: the App Store page.
+  var GET_URL = "https://apps.apple.com/app/id6777527858";
   var m = location.pathname.match(/^\/i\/([A-Za-z0-9]{4}-[A-Za-z0-9]{4})\/?$/) || (location.pathname === "/join" && location.search.match(/[?&]code=([A-Za-z0-9]{4}-[A-Za-z0-9]{4})/));
   var code = m && m[1] ? m[1].toUpperCase() : null;
   var fm = location.pathname.match(/^\/f\/([A-Za-z0-9_-]{22,64})\/?$/);
